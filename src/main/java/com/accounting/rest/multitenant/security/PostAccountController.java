@@ -1,4 +1,4 @@
-package com.accounting.rest.multitenant.controller;
+package com.accounting.rest.multitenant.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import com.accounting.rest.multitenant.tenant.post.service.PostAccountsType;
 import com.accounting.rest.multitenant.tenant.post.service.PostBookType;
 
 @RestController
-@RequestMapping("/api/pree/ac")
+@RequestMapping("/api/post/account")
 public class PostAccountController {
 	@Autowired
 	private PostAccountAMC postAccountAMC;
