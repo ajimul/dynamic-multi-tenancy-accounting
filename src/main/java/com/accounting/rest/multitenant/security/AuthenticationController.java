@@ -32,9 +32,6 @@ import com.accounting.rest.multitenant.mastertenant.entity.MasterTenant;
 import com.accounting.rest.multitenant.mastertenant.services.MasterTenantService;
 import com.accounting.rest.multitenant.util.JwtTokenUtil;
 
-/**
- * @author Md. Amran Hossain
- */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationController implements Serializable {
@@ -86,11 +83,10 @@ public class AuthenticationController implements Serializable {
 //		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 //
 //		final String jwt = jwtTokenUtil.generateToken(userDetails);
-		
-		
+
 		// Map the value into applicationScope bean
 		setMetaDataAfterLogin();
-		return ResponseEntity.ok(new AuthResponse ( jwt));
+		return ResponseEntity.ok(new AuthResponse(jwt));
 	}
 
 	private void loadCurrentDatabaseInstance(String databaseName, String userName) {

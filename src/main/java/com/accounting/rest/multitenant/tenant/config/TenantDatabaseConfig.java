@@ -20,9 +20,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-/**
- * @author Md. Amran Hossain
- */
 @Configuration
 @EnableTransactionManagement
 @ComponentScan(basePackages = { "com.accounting.rest.multitenant.tenant.repository",

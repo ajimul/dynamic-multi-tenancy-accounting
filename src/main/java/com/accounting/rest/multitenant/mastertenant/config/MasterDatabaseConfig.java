@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -33,23 +34,27 @@ public class MasterDatabaseConfig {
 
 	private static final Logger LOG = LoggerFactory.getLogger(MasterDatabaseConfig.class);
 
+//	@Autowired
+//	private MasterDatabaseConfigProperties masterDbProperties;;
 	@Autowired
-	private MasterDatabaseConfigProperties masterDbProperties;
+	private Environment environment;
 
 	// Create Master Data Source using master properties and also configure HikariCP
 	@Bean(name = "masterDataSource")
 	public DataSource masterDataSource() {
 		HikariDataSource hikariDataSource = new HikariDataSource();
-		hikariDataSource.setUsername(masterDbProperties.getUsername());
-		hikariDataSource.setPassword(masterDbProperties.getPassword());
-		hikariDataSource.setJdbcUrl(masterDbProperties.getUrl());
-		hikariDataSource.setDriverClassName(masterDbProperties.getDriverClassName());
-		hikariDataSource.setPoolName(masterDbProperties.getPoolName());
+		hikariDataSource.setUsername(environment.getProperty("spring.datasource.username"));
+		hikariDataSource.setPassword(environment.getProperty("spring.datasource.password"));
+		hikariDataSource.setJdbcUrl(environment.getProperty("spring.datasource.url"));
+		hikariDataSource.setDriverClassName(environment.getProperty("spring.datasource.driver-class"));
+		hikariDataSource.setPoolName(environment.getProperty("spring.datasource.poolName"));
 		// HikariCP settings
-		hikariDataSource.setMaximumPoolSize(masterDbProperties.getMaxPoolSize());
-		hikariDataSource.setMinimumIdle(masterDbProperties.getMinIdle());
-		hikariDataSource.setConnectionTimeout(masterDbProperties.getConnectionTimeout());
-		hikariDataSource.setIdleTimeout(masterDbProperties.getIdleTimeout());
+		hikariDataSource.setMaximumPoolSize(Integer.parseInt(environment.getProperty("spring.datasource.maxPoolSize")));
+		hikariDataSource.setMinimumIdle(Integer.parseInt(environment.getProperty("spring.datasource.minIdle")));
+		hikariDataSource
+				.setConnectionTimeout(Integer.parseInt(environment.getProperty("spring.datasource.connectionTimeout")));
+		hikariDataSource.setIdleTimeout(Integer.parseInt(environment.getProperty("spring.datasource.minIdle")));
+
 		LOG.info("Setup of masterDataSource succeeded.");
 		return hikariDataSource;
 	}

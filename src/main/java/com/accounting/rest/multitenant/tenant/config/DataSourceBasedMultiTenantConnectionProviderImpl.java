@@ -12,16 +12,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.accounting.rest.multitenant.mastertenant.config.DBContextHolder;
 import com.accounting.rest.multitenant.mastertenant.entity.MasterTenant;
 import com.accounting.rest.multitenant.mastertenant.repository.MasterTenantRepository;
-import com.accounting.rest.multitenant.util.DataSourceUtil;
+import com.accounting.rest.multitenant.mastertenant.services.DefaultMultiTanentDataSourceSet;
+import com.zaxxer.hikari.HikariDataSource;
 
-/**
- * @author Md. Amran Hossain
- */
 @Configuration
 public class DataSourceBasedMultiTenantConnectionProviderImpl
 		extends AbstractDataSourceBasedMultiTenantConnectionProviderImpl {
@@ -37,17 +36,24 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl
 
 	@Autowired
 	ApplicationContext applicationContext;
+//	@Autowired
+//	DataSourceUtil dataSourceUtil;
+	@Autowired
+	private Environment environment;
+	@Autowired
+	private DefaultMultiTanentDataSourceSet defaultMultiTanentDataSourceSet;
 
 	@Override
 	protected DataSource selectAnyDataSource() {
+
 		// This method is called more than once. So check if the data source map
 		// is empty. If it is then rescan master_tenant table for all tenant
 		if (dataSourcesMtApp.isEmpty()) {
+			defaultMultiTanentDataSourceSet.insertDefaultMasterTenant();
 			List<MasterTenant> masterTenants = masterTenantRepository.findAll();
 			LOG.info("selectAnyDataSource() method call...Total tenants:" + masterTenants.size());
 			for (MasterTenant masterTenant : masterTenants) {
-				dataSourcesMtApp.put(masterTenant.getDbName(),
-						DataSourceUtil.createAndConfigureDataSource(masterTenant));
+				dataSourcesMtApp.put(masterTenant.getDbName(), createAndConfigureDataSource(masterTenant));
 			}
 		}
 		return this.dataSourcesMtApp.values().iterator().next();
@@ -55,6 +61,7 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl
 
 	@Override
 	protected DataSource selectDataSource(String tenantIdentifier) {
+
 		// If the requested tenant id is not present check for it in the master
 		// database 'master_tenant' table
 		tenantIdentifier = initializeTenantIfLost(tenantIdentifier);
@@ -63,8 +70,7 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl
 			LOG.info("selectDataSource() method call...Tenant:" + tenantIdentifier + " Total tenants:"
 					+ masterTenants.size());
 			for (MasterTenant masterTenant : masterTenants) {
-				dataSourcesMtApp.put(masterTenant.getDbName(),
-						DataSourceUtil.createAndConfigureDataSource(masterTenant));
+				dataSourcesMtApp.put(masterTenant.getDbName(), createAndConfigureDataSource(masterTenant));
 			}
 		}
 		// check again if tenant exist in map after rescan master_db, if not, throw
@@ -82,5 +88,35 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl
 			tenantIdentifier = DBContextHolder.getCurrentDb();
 		}
 		return tenantIdentifier;
+	}
+
+	public DataSource createAndConfigureDataSource(MasterTenant masterTenant) {
+		HikariDataSource ds = new HikariDataSource();
+		ds.setUsername(environment.getProperty("spring.datasource.username"));
+		ds.setPassword(environment.getProperty("spring.datasource.password"));
+		ds.setJdbcUrl(replaceDatabaseName(environment.getProperty("spring.datasource.url"), masterTenant.getDbName()));
+		ds.setDriverClassName(environment.getProperty("spring.datasource.driver-class"));
+		// HikariCP settings - could come from the master_tenant table but
+		// hardcoded here for brevity
+		// Maximum waiting time for a connection from the pool
+		ds.setConnectionTimeout(Integer.parseInt(environment.getProperty("spring.datasource.maxPoolSize")));
+		// Minimum number of idle connections in the pool
+		ds.setMinimumIdle(Integer.parseInt(environment.getProperty("spring.datasource.minIdle")));
+		// Maximum number of actual connection in the pool
+		ds.setMaximumPoolSize(Integer.parseInt(environment.getProperty("spring.datasource.maxPoolSize")));
+		// Maximum time that a connection is allowed to sit idle in the pool
+		ds.setIdleTimeout(Integer.parseInt(environment.getProperty("spring.datasource.connectionTimeout")));
+		ds.setConnectionTimeout(Integer.parseInt(environment.getProperty("spring.datasource.connectionTimeout")));
+		// Setting up a pool name for each tenant datasource
+		String tenantConnectionPoolName = masterTenant.getDbName() + "-connection-pool";
+		ds.setPoolName(tenantConnectionPoolName);
+		LOG.info("Configured datasource:" + masterTenant.getDbName() + ". Connection pool name:"
+				+ tenantConnectionPoolName);
+		return ds;
+	}
+
+	public static String replaceDatabaseName(String jdbcUrl, String newDatabaseName) {
+		// Use replaceFirst with a regex to replace the part between / and ?
+		return jdbcUrl.replaceFirst("/[^?]+", "/" + newDatabaseName);
 	}
 }

@@ -22,7 +22,7 @@ public class TenantInitializerController {
 	UsersRepo userRepository;
 
 	@PostMapping("/add")
-	public ResponseEntity<MasterTenant> add_Tenant(@RequestBody MasterTenant masterTenant) {
+	public ResponseEntity<String> add_Tenant(@RequestBody MasterTenant masterTenant) {
 
 		return new ResponseEntity<>(masterTenantServiceImpl.add_Tenant(masterTenant), HttpStatus.CREATED);
 

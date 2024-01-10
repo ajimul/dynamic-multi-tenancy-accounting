@@ -7,22 +7,25 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.stereotype.Service;
 
-import com.accounting.rest.multitenant.mastertenant.config.MasterDatabaseConfigProperties;
 import com.accounting.rest.multitenant.mastertenant.entity.MasterTenant;
 import com.accounting.rest.multitenant.mastertenant.repository.MasterTenantRepository;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Service
 public class SchemaService {
-	@Autowired
-	private MasterDatabaseConfigProperties masterDbProperties;
+//	@Autowired
+//	private MasterDatabaseConfigProperties masterDbProperties;
 	@Autowired
 	private MasterTenantRepository masterTenantRepository;
+	@Autowired
+	private Environment environment;
+	public static final String PROPERTY_PREFIX = "spring.datasource.";
 
 	@Bean
 	public void createOrUpdateSchema() {
@@ -30,16 +33,23 @@ public class SchemaService {
 		for (MasterTenant data : masterTenants) {
 			LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 			HikariDataSource hikariDataSource = new HikariDataSource();
-			hikariDataSource.setUsername(data.getUserName());
-			hikariDataSource.setPassword(data.getPassword());
-			hikariDataSource.setJdbcUrl(data.getUrl());
-			hikariDataSource.setDriverClassName(data.getDriverClass());
-			hikariDataSource.setPoolName(data.getDbName() + "-connection-pool");
+//			hikariDataSource.setUsername(data.getUserName());
+//			hikariDataSource.setPassword(data.getPassword());
+			hikariDataSource.setUsername(environment.getProperty("spring.datasource.username"));
+			hikariDataSource.setPassword(environment.getProperty("spring.datasource.password"));
+
+//			hikariDataSource.setJdbcUrl(data.getUrl());
+			hikariDataSource.setJdbcUrl(
+					replaceDatabaseName(environment.getProperty("spring.datasource.url"), data.getDbName()));
+			hikariDataSource.setDriverClassName(environment.getProperty("spring.datasource.driver-class"));
+			hikariDataSource.setPoolName(environment.getProperty("spring.datasource.poolName" + "-connection-pool"));
 			// HikariCP settings
-			hikariDataSource.setMaximumPoolSize(masterDbProperties.getMaxPoolSize());
-			hikariDataSource.setMinimumIdle(masterDbProperties.getMinIdle());
-			hikariDataSource.setConnectionTimeout(masterDbProperties.getConnectionTimeout());
-			hikariDataSource.setIdleTimeout(masterDbProperties.getIdleTimeout());
+			hikariDataSource
+					.setMaximumPoolSize(Integer.parseInt(environment.getProperty("spring.datasource.maxPoolSize")));
+			hikariDataSource.setMinimumIdle(Integer.parseInt(environment.getProperty("spring.datasource.minIdle")));
+			hikariDataSource.setConnectionTimeout(
+					Integer.parseInt(environment.getProperty("spring.datasource.connectionTimeout")));
+			hikariDataSource.setIdleTimeout(Integer.parseInt(environment.getProperty("spring.datasource.maxPoolSize")));
 			DataSource ds = hikariDataSource;
 
 			Properties properties = new Properties();
@@ -59,6 +69,11 @@ public class SchemaService {
 			em.destroy();
 		}
 
+	}
+
+	public String replaceDatabaseName(String jdbcUrl, String newDatabaseName) {
+		// Use replaceFirst with a regex to replace the part between / and ?
+		return jdbcUrl.replaceFirst("/[^?]+", "/" + newDatabaseName);
 	}
 
 }

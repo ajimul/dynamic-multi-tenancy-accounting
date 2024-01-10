@@ -1,0 +1,57 @@
+{"properties": [
+  {
+    "name": "spring.datasource.connectionTimeout",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.connectionTimeout'"
+  },
+  {
+    "name": "spring.datasource.connectionTimeout",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.connectionTimeout'"
+  },
+  {
+    "name": "spring.datasource.connectionTimeout",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.connectionTimeout'"
+  },
+  {
+    "name": "spring.datasource.connectionTimeout",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.connectionTimeout'"
+  },
+  {
+    "name": "spring.datasource.maxPoolSize",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.maxPoolSize'"
+  },
+  {
+    "name": "spring.datasource.idleTimeout",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.idleTimeout'"
+  },
+  {
+    "name": "spring.datasource.minIdle",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.minIdle'"
+  },
+  {
+    "name": "spring.datasource.poolName",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.poolName'"
+  },
+  {
+    "name": "spring.datasource.maxPoolSize",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.maxPoolSize'"
+  },
+  {
+    "name": "spring.datasource.maxPoolSize",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.maxPoolSize'"
+  },
+  {
+    "name": "spring.datasource.maxPoolSize",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.maxPoolSize'"
+  }
+]}
