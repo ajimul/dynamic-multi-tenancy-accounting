@@ -11,6 +11,8 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<property name="net.sf.jasperreports.consume.space.on.overflow" value="true"/>
+	<property name="net.sf.jasperreports.awt.ignore.missing.font" value="true"/>
+	<property name="net.sf.jasperreports.default.font.name=SansSerif"/>
 	<property name="net.sf.jasperreports.awt.check.available.printers" value="true"/>
 	<parameter name="accountName" class="java.lang.String"/>
 	<parameter name="headText" class="java.lang.String"/>
@@ -60,14 +62,14 @@
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					</reportElement>
 					<textElement textAlignment="Center" verticalAlignment="Top">
-						<font fontName="Arial" size="12"/>
+						<font fontName="SansSerif" size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{headerContactDetails}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="231" y="1" width="100" height="19" uuid="03e2e48a-715a-477d-a336-862ed919838a"/>
 					<textElement textAlignment="Center">
-						<font fontName="Arial" size="15" isBold="true" isUnderline="true"/>
+						<font fontName="SansSerif" size="15" isBold="true" isUnderline="true"/>
 					</textElement>
 					<text><![CDATA[BILL]]></text>
 				</staticText>
@@ -86,7 +88,7 @@
 						<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
 					</reportElement>
 					<textElement textAlignment="Left">
-						<font fontName="Arial" size="10"/>
+						<font fontName="SansSerif" size="10"/>
 						<paragraph firstLineIndent="3"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$P{accountName}]]></textFieldExpression>
@@ -148,7 +150,7 @@
 						<pen lineWidth="0.25" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Top">
-						<font fontName="Arial"/>
+						<font fontName="SansSerif"/>
 					</textElement>
 					<text><![CDATA[SI No.]]></text>
 				</staticText>
@@ -160,7 +162,7 @@
 						<pen lineWidth="0.25" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="Arial"/>
+						<font fontName="SansSerif"/>
 						<paragraph firstLineIndent="3"/>
 					</textElement>
 					<text><![CDATA[Description Of Goods and Services]]></text>
@@ -171,7 +173,7 @@
 						<pen lineWidth="0.25" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial"/>
+						<font fontName="SansSerif"/>
 					</textElement>
 					<text><![CDATA[HSN/SAC]]></text>
 				</staticText>
@@ -181,7 +183,7 @@
 						<pen lineWidth="0.25" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial"/>
+						<font fontName="SansSerif"/>
 					</textElement>
 					<text><![CDATA[Quantity]]></text>
 				</staticText>
@@ -191,7 +193,7 @@
 						<pen lineWidth="0.25" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial"/>
+						<font fontName="SansSerif"/>
 					</textElement>
 					<text><![CDATA[Rate]]></text>
 				</staticText>
@@ -201,7 +203,7 @@
 						<pen lineWidth="0.25" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial"/>
+						<font fontName="SansSerif"/>
 					</textElement>
 					<text><![CDATA[Per]]></text>
 				</staticText>
@@ -211,7 +213,7 @@
 						<pen lineWidth="0.25" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial"/>
+						<font fontName="SansSerif"/>
 					</textElement>
 					<text><![CDATA[Disc. %]]></text>
 				</staticText>
@@ -221,7 +223,7 @@
 						<pen lineWidth="0.25" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial"/>
+						<font fontName="SansSerif"/>
 					</textElement>
 					<text><![CDATA[Amount]]></text>
 				</staticText>
@@ -246,7 +248,7 @@
 					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Arial" size="10"/>
+					<font fontName="SansSerif" size="10"/>
 					<paragraph firstLineIndent="3"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bookDetailsParticular}.toString().replace("[", "").replace("]", "")]]></textFieldExpression>
@@ -264,7 +266,7 @@
 					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="10"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bookDetailsHsnCode}]]></textFieldExpression>
 			</textField>
@@ -281,7 +283,7 @@
 					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="10"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bookDetailsUnitValue}+$F{bookDetailsUnit}]]></textFieldExpression>
 			</textField>
@@ -298,7 +300,7 @@
 					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="10"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bookDetailsParticularAmount}]]></textFieldExpression>
 			</textField>
@@ -315,7 +317,7 @@
 					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="10"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bookDetailsUnit}]]></textFieldExpression>
 			</textField>
@@ -332,7 +334,7 @@
 					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="10"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{bookDetailsTradDiscount}]]></textFieldExpression>
 			</textField>
@@ -349,7 +351,7 @@
 					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font fontName="Arial" size="10"/>
+					<font fontName="SansSerif" size="10"/>
 					<paragraph lineSpacing="Proportional" firstLineIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
@@ -367,7 +369,7 @@
 					<rightPen lineWidth="0.25" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="10"/>
+					<font fontName="SansSerif" size="10"/>
 					<paragraph lineSpacing="Proportional" firstLineIndent="2"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{rowSubtotal}]]></textFieldExpression>
@@ -385,7 +387,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Center">
-					<font fontName="Arial"/>
+					<font fontName="SansSerif"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -412,7 +414,7 @@
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement>
-						<font fontName="Arial" size="9" isBold="false"/>
+						<font fontName="SansSerif" size="9" isBold="false"/>
 						<paragraph firstLineIndent="3"/>
 					</textElement>
 					<text><![CDATA[5. Warranty of any peripheral, Goods by the authorized service center.]]></text>
@@ -431,7 +433,7 @@
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement>
-						<font fontName="Arial" size="9" isBold="false"/>
+						<font fontName="SansSerif" size="9" isBold="false"/>
 						<paragraph firstLineIndent="3"/>
 					</textElement>
 					<text><![CDATA[3. Warranty as per company norms. ]]></text>
@@ -450,7 +452,7 @@
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement>
-						<font fontName="Arial" size="9" isBold="false"/>
+						<font fontName="SansSerif" size="9" isBold="false"/>
 						<paragraph firstLineIndent="3"/>
 					</textElement>
 					<text><![CDATA[2. Goods once sold can not be taken back.]]></text>
@@ -469,7 +471,7 @@
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement>
-						<font fontName="Arial" size="9" isBold="false"/>
+						<font fontName="SansSerif" size="9" isBold="false"/>
 						<paragraph firstLineIndent="3"/>
 					</textElement>
 					<text><![CDATA[4. No complain will be entertained of any electronic good physical damage or burnt while testing.]]></text>
@@ -487,7 +489,7 @@
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement>
-						<font fontName="Arial" size="9" isBold="false"/>
+						<font fontName="SansSerif" size="9" isBold="false"/>
 						<paragraph firstLineIndent="3"/>
 					</textElement>
 					<text><![CDATA[1. All disputes are subject to Japaiguri Jurisdiction.]]></text>
@@ -505,7 +507,7 @@
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement>
-						<font fontName="Arial" size="9" isBold="false" isUnderline="true"/>
+						<font fontName="SansSerif" size="9" isBold="false" isUnderline="true"/>
 						<paragraph firstLineIndent="3"/>
 					</textElement>
 					<text><![CDATA[Terms & Condition :]]></text>
@@ -526,7 +528,7 @@
 						<pen lineWidth="0.25" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Left" verticalAlignment="Top">
-						<font fontName="Arial"/>
+						<font fontName="SansSerif"/>
 						<paragraph firstLineIndent="3"/>
 					</textElement>
 					<text><![CDATA[Bank Name :]]></text>
@@ -549,7 +551,7 @@
 							<pen lineWidth="0.25" lineColor="#000000"/>
 						</box>
 						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font fontName="Arial"/>
+							<font fontName="SansSerif"/>
 						</textElement>
 						<text><![CDATA[]]></text>
 					</staticText>
@@ -564,7 +566,7 @@
 							<pen lineWidth="0.25" lineColor="#000000"/>
 						</box>
 						<textElement textAlignment="Right" verticalAlignment="Middle">
-							<font fontName="Arial"/>
+							<font fontName="SansSerif"/>
 							<paragraph firstLineIndent="0" leftIndent="0" rightIndent="5"/>
 						</textElement>
 						<text><![CDATA[Total ]]></text>
@@ -577,7 +579,7 @@
 							<pen lineWidth="0.25" lineColor="#000000"/>
 						</box>
 						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font fontName="Arial"/>
+							<font fontName="SansSerif"/>
 						</textElement>
 						<text><![CDATA[]]></text>
 					</staticText>
@@ -589,7 +591,7 @@
 							<pen lineWidth="0.25" lineColor="#000000"/>
 						</box>
 						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font fontName="Arial"/>
+							<font fontName="SansSerif"/>
 						</textElement>
 						<text><![CDATA[]]></text>
 					</staticText>
@@ -599,7 +601,7 @@
 							<pen lineWidth="0.25" lineColor="#000000"/>
 						</box>
 						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font fontName="Arial"/>
+							<font fontName="SansSerif"/>
 						</textElement>
 						<text><![CDATA[]]></text>
 					</staticText>
@@ -608,7 +610,7 @@
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 						</reportElement>
 						<textElement textAlignment="Center" verticalAlignment="Middle">
-							<font fontName="Arial"/>
+							<font fontName="SansSerif"/>
 						</textElement>
 						<textFieldExpression><![CDATA[$V{TotalAmount}]]></textFieldExpression>
 					</textField>
@@ -633,7 +635,7 @@
 						<pen lineWidth="0.25" lineColor="#000000"/>
 					</box>
 					<textElement textAlignment="Left" verticalAlignment="Top">
-						<font fontName="Arial"/>
+						<font fontName="SansSerif"/>
 						<paragraph firstLineIndent="3"/>
 					</textElement>
 					<text><![CDATA[Total Amount (in word) -]]></text>

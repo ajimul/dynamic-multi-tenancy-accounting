@@ -1,6 +1,7 @@
 package com.accounting.rest.multitenant.controller;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,44 +46,91 @@ public class SingleReportController {
 
 	}
 
+//	@GetMapping("/{FolioNo}")
+//	public ResponseEntity<byte[]> Print(@PathVariable Long FolioNo) throws JRException {
+//
+//		InvoiceDto invoice = new InvoiceDto();
+//		invoice = folioNumberServices.getInvoiceByFolioId(FolioNo);
+//
+////		String masterReportFileName = "src/main/resources/sub_invoice.jrxml";
+//		String masterReportFileName = "/sub_invoice.jrxml";
+//
+//		List<InvoiceHeader> invoiceHeader = new ArrayList<InvoiceHeader>();
+//		invoiceHeader = invoiceHeaderService.getAllInvoiceHeaders();
+//
+//		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(invoice.getInvoiceJRBeanDataSource());
+//		JasperPrint jasperPrint = new JasperPrint();
+////		LocalDate booksDate = LocalDate.now();
+//		java.sql.Date sqlDate = java.sql.Date.valueOf(invoice.getInvoiceJRParameter().getInvoiceDate());
+////		java.sql.Date sqlDate = java.sql.Date.valueOf(booksDate);
+//		try {
+//			JasperReport compailReport = JasperCompileManager.compileReport(masterReportFileName);
+//			Map<String, Object> parameters = new HashMap<String, Object>();
+//			parameters.put("accountName", invoice.getInvoiceJRParameter().getPartyName());
+//			parameters.put("headText", invoiceHeader.get(0).getOrganizationName().toString());
+//			parameters.put("headerContactDetails", invoiceHeader.get(0).getContactDetails().toString());
+//			parameters.put("InvoiceNo", invoice.getInvoiceJRParameter().getFolioId().toString());
+//			parameters.put("InvoiceDate", sqlDate);
+//			parameters.put("Bill_Address", invoice.getInvoiceJRParameter().getPartyBillingAddress());
+//			parameters.put("Shipping_Address", invoice.getInvoiceJRParameter().getPartyShipingAddress());
+//
+//			jasperPrint = JasperFillManager.fillReport(compailReport, parameters, dataSource);
+//
+//		} catch (JRException e) {
+//			System.out.println(e);
+//
+//			e.printStackTrace();
+//		}
+//
+//		byte data[] = JasperExportManager.exportReportToPdf(jasperPrint);
+//
+//		System.err.println(data);
+//
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");
+//		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(data);
+//	}
+
 	@GetMapping("/{FolioNo}")
 	public ResponseEntity<byte[]> Print(@PathVariable Long FolioNo) throws JRException {
 
-		InvoiceDto invoice = new InvoiceDto();
-		invoice = folioNumberServices.getInvoiceByFolioId(FolioNo);
+		InvoiceDto invoice = folioNumberServices.getInvoiceByFolioId(FolioNo);
 
-		String masterReportFileName = "src/main/resources/sub_invoice.jrxml";
+		// Load JRXML file from classpath
+		InputStream jrxmlStream = getClass().getResourceAsStream("/sub_invoice.jrxml");
 
-		List<InvoiceHeader> invoiceHeader = new ArrayList<InvoiceHeader>();
-		invoiceHeader = invoiceHeaderService.getAllInvoiceHeaders();
+		if (jrxmlStream == null) {
+			throw new JRException("JRXML file not found");
+		}
+
+		List<InvoiceHeader> invoiceHeader = invoiceHeaderService.getAllInvoiceHeaders();
 
 		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(invoice.getInvoiceJRBeanDataSource());
-		JasperPrint jasperPrint = new JasperPrint();
-//		LocalDate booksDate = LocalDate.now();
-		java.sql.Date sqlDate = java.sql.Date.valueOf(invoice.getInvoiceJRParameter().getInvoiceDate());
-//		java.sql.Date sqlDate = java.sql.Date.valueOf(booksDate);
+		JasperPrint jasperPrint;
+
 		try {
-			JasperReport compailReport = JasperCompileManager.compileReport(masterReportFileName);
-			Map<String, Object> parameters = new HashMap<String, Object>();
+			JasperReport compileReport = JasperCompileManager.compileReport(jrxmlStream);
+			Map<String, Object> parameters = new HashMap<>();
 			parameters.put("accountName", invoice.getInvoiceJRParameter().getPartyName());
 			parameters.put("headText", invoiceHeader.get(0).getOrganizationName().toString());
 			parameters.put("headerContactDetails", invoiceHeader.get(0).getContactDetails().toString());
 			parameters.put("InvoiceNo", invoice.getInvoiceJRParameter().getFolioId().toString());
-			parameters.put("InvoiceDate", sqlDate);
+			parameters.put("InvoiceDate", java.sql.Date.valueOf(invoice.getInvoiceJRParameter().getInvoiceDate()));
 			parameters.put("Bill_Address", invoice.getInvoiceJRParameter().getPartyBillingAddress());
 			parameters.put("Shipping_Address", invoice.getInvoiceJRParameter().getPartyShipingAddress());
 
-			jasperPrint = JasperFillManager.fillReport(compailReport, parameters, dataSource);
-
-		} catch (JRException e) {
-			System.out.println(e);
-
-			e.printStackTrace();
+			jasperPrint = JasperFillManager.fillReport(compileReport, parameters, dataSource);
+		} finally {
+			try {
+				if (jrxmlStream != null) {
+					jrxmlStream.close();
+				}
+			} catch (IOException e) {
+				// Handle or log the IOException if necessary
+			}
 		}
 
 		byte data[] = JasperExportManager.exportReportToPdf(jasperPrint);
-
-		System.err.println(data);
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Disposition", "inline; filename=citiesreport.pdf");

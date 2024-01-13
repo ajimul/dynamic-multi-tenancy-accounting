@@ -103,10 +103,17 @@
 			<version>5.2.2.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
+<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
+<dependency>
+    <groupId>net.sf.jasperreports</groupId>
+    <artifactId>jasperreports-fonts</artifactId>
+    <version>6.21.0</version>
+</dependency>
+
 	</dependencies>
 
 	<build>
-	<finalName>account</finalName>
+		<finalName>account</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
