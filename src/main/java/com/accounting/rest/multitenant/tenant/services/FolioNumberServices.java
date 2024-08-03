@@ -16,6 +16,7 @@ import com.accounting.rest.multitenant.dto.InvoiceJRParameter;
 import com.accounting.rest.multitenant.dto.PartyDetailsDTO;
 import com.accounting.rest.multitenant.tenant.entity.FolioNumber;
 import com.accounting.rest.multitenant.tenant.entity.InventoryItems;
+import com.accounting.rest.multitenant.tenant.entity.TradingItemsSerialNo;
 import com.accounting.rest.multitenant.tenant.repository.FolioNumberRepo;
 
 @Service
@@ -45,9 +46,9 @@ public class FolioNumberServices {
 		folioNumberRepo.save(folio);
 	}
 
-//Find All FolioNumber 
+//Find All FolioNumber
 	public List<GenericsFolioNumber> findAllFolioNumber() {
-		List<GenericsFolioNumber> folioNumber = new ArrayList<GenericsFolioNumber>();
+		List<GenericsFolioNumber> folioNumber = new ArrayList<>();
 		List<FolioNumber> folioNumberList = folioNumberRepo.findAll();
 		for (FolioNumber folioNumbers : folioNumberList) {
 			GenericsFolioNumber newFolio = new GenericsFolioNumber();
@@ -72,7 +73,7 @@ public class FolioNumberServices {
 
 		InvoiceDto invoiceDto = new InvoiceDto();
 
-		List<InvoiceJRBeanDataSource> BeanDataSourceList = new ArrayList<InvoiceJRBeanDataSource>();
+		List<InvoiceJRBeanDataSource> BeanDataSourceList = new ArrayList<>();
 
 		InvoiceJRParameter invoiceJRParameter = new InvoiceJRParameter();
 
@@ -98,7 +99,7 @@ public class FolioNumberServices {
 				invoiceJRParameter.setInvoiceDate(folio.get().getBookInfos().get(i).getBookInfoDate());
 
 				for (int j = 0; j < folio.get().getBookInfos().get(i).getBookDetails().size(); j++) {
-					List<String> items_ItemsSerialNo = new ArrayList<String>();
+					List<String> items_ItemsSerialNo = new ArrayList<>();
 					StringBuilder items_WithSerialNo = new StringBuilder();
 					InventoryItems inventoryItems = new InventoryItems();
 					inventoryItems = inventoryItemsService.getInventoryItemByiiId(folio.get().getBookInfos().get(i)
@@ -106,11 +107,9 @@ public class FolioNumberServices {
 					String bookParticular = inventoryItems.getIiParticular();
 					String hsn = inventoryItems.getIiHsn();
 					items_WithSerialNo.append(bookParticular + " \n");
-					for (int k = 0; k < folio.get().getBookInfos().get(i).getBookDetails().get(j).getBookItemsSerialNo()
-							.size(); k++) {
-						items_WithSerialNo.append(folio.get().getBookInfos().get(i).getBookDetails().get(j)
-								.getBookItemsSerialNo().get(k).getSerialNo() + " \n");
-					}
+					for (TradingItemsSerialNo element : folio.get().getBookInfos().get(i).getBookDetails().get(j).getBookItemsSerialNo()) {
+items_WithSerialNo.append(element.getSerialNo() + " \n");
+}
 
 					items_ItemsSerialNo.add(items_WithSerialNo.toString());
 					InvoiceJRBeanDataSource invoiceJRBeanDataSource = new InvoiceJRBeanDataSource();

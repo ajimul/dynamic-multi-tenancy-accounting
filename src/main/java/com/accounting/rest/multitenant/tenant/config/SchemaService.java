@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.hibernate.cfg.AvailableSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
@@ -53,10 +54,10 @@ public class SchemaService {
 			DataSource ds = hikariDataSource;
 
 			Properties properties = new Properties();
-			properties.put(org.hibernate.cfg.Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
-			properties.put(org.hibernate.cfg.Environment.SHOW_SQL, true);
-			properties.put(org.hibernate.cfg.Environment.FORMAT_SQL, true);
-			properties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "update");
+			properties.put(AvailableSettings.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+			properties.put(AvailableSettings.SHOW_SQL, true);
+			properties.put(AvailableSettings.FORMAT_SQL, true);
+			properties.put(AvailableSettings.HBM2DDL_AUTO, "update");
 
 			em.setDataSource(ds);
 			em.setPackagesToScan("com.accounting.rest.multitenant.tenant");

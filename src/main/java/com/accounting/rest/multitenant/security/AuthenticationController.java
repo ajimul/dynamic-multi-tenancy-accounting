@@ -18,9 +18,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.annotation.ApplicationScope;
 
@@ -43,12 +43,14 @@ public class AuthenticationController implements Serializable {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
+
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
+
 	@Autowired
 	MasterTenantService masterTenantService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@PostMapping("/login")
 	public ResponseEntity<?> userLogin(@RequestBody @NotNull UserLoginDTO userLoginDTO) throws AuthenticationException {
 
 		LOGGER.info("userLogin() method call...");
@@ -57,7 +59,6 @@ public class AuthenticationController implements Serializable {
 			return new ResponseEntity<>("User name is required", HttpStatus.BAD_REQUEST);
 
 		}
-
 		// set database parameter
 		MasterTenant masterTenant = masterTenantService.findByClientId(userLoginDTO.getTenantOrClientId());
 
@@ -79,10 +80,6 @@ public class AuthenticationController implements Serializable {
 
 		final String jwt = jwtTokenUtil.generateToken(userDetails.getUsername(),
 				String.valueOf(userLoginDTO.getTenantOrClientId()));
-
-//		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-//
-//		final String jwt = jwtTokenUtil.generateToken(userDetails);
 
 		// Map the value into applicationScope bean
 		setMetaDataAfterLogin();

@@ -3,7 +3,7 @@ package com.accounting.rest.exception;
 public class LedgerDetailsNotFoundException extends RuntimeException {
 
 	/**
-	 * 
+	 *
 	 */
 
 	public LedgerDetailsNotFoundException(String message) {

@@ -15,7 +15,7 @@ import com.accounting.rest.multitenant.tenant.repository.InventoryItemsRepo;
 
 @Service
 //@Transactional()//Use For Single Database
-@Transactional("tenantTransactionManager")//Use For Multitenant
+@Transactional("tenantTransactionManager") // Use For Multitenant
 public class InventoryItemsService {
 	private final InventoryItemsRepo inventoryItemsRepo;
 
@@ -27,9 +27,10 @@ public class InventoryItemsService {
 
 //
 ////	 Add  InventoryItems
-//	public void addInventoryItems(InventoryItems items) {
-//		inventoryItemsRepo.save(items);
-//	}
+	public void addInventoryItems(InventoryItems items) {
+		inventoryItemsRepo.save(items);
+	}
+
 //
 ////	 Add List Of InventoryItems
 	public List<InventoryItems> addInventoryItemsList(List<InventoryItems> items) {
@@ -77,8 +78,8 @@ public class InventoryItemsService {
 	}
 
 	public List<GenericsInventoryItems> getInventoryItems() {
-		List<InventoryItems> items = new ArrayList<InventoryItems>(inventoryItemsRepo.findAll());
-		List<GenericsInventoryItems> newItems = new ArrayList<GenericsInventoryItems>();
+		List<InventoryItems> items = new ArrayList<>(inventoryItemsRepo.findAll());
+		List<GenericsInventoryItems> newItems = new ArrayList<>();
 		for (int i = 0; i < items.size(); i++) {
 			GenericsInventoryItems item = new GenericsInventoryItems();
 			item.setIiId(items.get(i).getIiId());
@@ -105,7 +106,7 @@ public class InventoryItemsService {
 	}
 
 	public List<BooksDetailsDTO> getbookDetailsByBookInfoId(Long bookInfoId) {
-		List<BooksDetailsDTO> booksDetailsDTO = new ArrayList<BooksDetailsDTO>(
+		List<BooksDetailsDTO> booksDetailsDTO = new ArrayList<>(
 				inventoryItemsRepo.getInventoryItemsByBookInfoId(bookInfoId));
 		return booksDetailsDTO;
 

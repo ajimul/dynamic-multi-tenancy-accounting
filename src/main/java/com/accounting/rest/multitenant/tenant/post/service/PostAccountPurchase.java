@@ -19,18 +19,18 @@ public class PostAccountPurchase {
 	private  AccountsForPurchaseRepo accountsForPurchaseRepo;
 
 	public void AccountsPurchaseList() {
-		ArrayList<String> preeAccounts = new ArrayList<String>();
+		ArrayList<String> preeAccounts = new ArrayList<>();
 		preeAccounts.add("Sundry Creditors");
 		preeAccounts.add("Cash Account");
 		preeAccounts.add("Bank Account");
 
-		List<AccountsForPurchase> acList = new ArrayList<AccountsForPurchase>();
-		for (int i = 0; i < preeAccounts.size(); i++) {
+		List<AccountsForPurchase> acList = new ArrayList<>();
+		for (String preeAccount : preeAccounts) {
 			Optional<AccountsForPurchase> optionalAc = Optional.ofNullable(new AccountsForPurchase());
-			optionalAc = getAccountsPurchase(preeAccounts.get(i));
+			optionalAc = getAccountsPurchase(preeAccount);
 			if (!optionalAc.isPresent()) {
 				AccountsForPurchase ac = new AccountsForPurchase();
-				ac.setAccountName(preeAccounts.get(i));
+				ac.setAccountName(preeAccount);
 				acList.add(ac);
 			}
 

@@ -1,9 +1,6 @@
 package com.accounting.rest.multitenant.tenant.services;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +17,7 @@ import com.accounting.rest.multitenant.tenant.repository.BookTypeRepo;
 public class BookTypeServices {
 	@Autowired
 	private  BookTypeRepo bookTypeRepo;
-		
+
 	@Autowired
 	public PostBookType postBookType;
 
@@ -28,8 +25,8 @@ public class BookTypeServices {
 	public void BookTypeList() {
 		postBookType.BookAccountsList();
 	}
-	
-	
+
+
 
 	public Optional<BookType> getBookTypeByName(String typeName) {
 		BookType ac = new BookType();
@@ -46,7 +43,7 @@ public class BookTypeServices {
 
 	}
 
-//Find All BookType 
+//Find All BookType
 //	public List<GenericsBookType> findAllBookType() {
 //		List<GenericsBookType> bookTytpe = new ArrayList<GenericsBookType>();
 //		List<BookType> bookTypeList = bookTypeRepo.findAll();

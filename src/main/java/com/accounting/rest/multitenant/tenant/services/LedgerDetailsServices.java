@@ -34,7 +34,7 @@ public class LedgerDetailsServices {
 
 	}
 
-//Find All Ledger 
+//Find All Ledger
 	public List<LedgerDetails> findAllLedgerDetails() {
 		return ledgerDetailsRepo.findAll();
 

@@ -12,7 +12,7 @@ public class AuthResponse implements Serializable {
 
 
 //    public AuthResponse(String userName, String jwt) {
-//    	
+//
 //    	this.userName = userName;
 //    	this.jwt = jwt;
 //    }
@@ -26,5 +26,5 @@ public class AuthResponse implements Serializable {
 		return jwt;
 	}
 
-	
+
 }

@@ -8,9 +8,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.accounting.rest</groupId>
-	<artifactId>accounting</artifactId>
+	<artifactId>multi-tanent-accounting</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>accounting</name>
+	<name>multi-tanent-accounting</name>
 	<description>multi-tenant-accounting project in Spring Boot 2.2.6</description>
 
 	<properties>
@@ -103,12 +103,12 @@
 			<version>5.2.2.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
-<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
-<dependency>
-    <groupId>net.sf.jasperreports</groupId>
-    <artifactId>jasperreports-fonts</artifactId>
-    <version>6.21.0</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports-fonts -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports-fonts</artifactId>
+			<version>6.21.0</version>
+		</dependency>
 
 	</dependencies>
 

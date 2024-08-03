@@ -20,7 +20,7 @@ public class PostAccountsType {
 	private  AccountTypeRepo accountTypeRepo;
 
 	public void AccountTypeAccountsList() {
-		ArrayList<String> preeAccountTypes = new ArrayList<String>();
+		ArrayList<String> preeAccountTypes = new ArrayList<>();
 		preeAccountTypes.add("Direct Expenses");
 		preeAccountTypes.add("Indirect Expenses");
 		preeAccountTypes.add("Direct Income");
@@ -32,13 +32,13 @@ public class PostAccountsType {
 		preeAccountTypes.add("Non Current Liability");
 		preeAccountTypes.add("Capital Account");
 
-		List<AccountType> acTypeList = new ArrayList<AccountType>();
-		for (int i = 0; i < preeAccountTypes.size(); i++) {
+		List<AccountType> acTypeList = new ArrayList<>();
+		for (String preeAccountType : preeAccountTypes) {
 			Optional<AccountType> optionalAcType = Optional.ofNullable(new AccountType());
-			optionalAcType = Optional.ofNullable(getAccTypeId_ByName(preeAccountTypes.get(i)));
+			optionalAcType = Optional.ofNullable(getAccTypeId_ByName(preeAccountType));
 			if (!optionalAcType.isPresent()) {
 				AccountType acType = new AccountType();
-				acType.setAccountTypeName(preeAccountTypes.get(i));
+				acType.setAccountTypeName(preeAccountType);
 				acType.setAccountTypeDebitAmount(null);
 				acType.setAccountTypeCreditAmount(null);
 				acTypeList.add(acType);

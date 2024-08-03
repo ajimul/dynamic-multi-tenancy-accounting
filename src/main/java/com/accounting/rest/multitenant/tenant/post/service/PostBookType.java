@@ -19,7 +19,7 @@ public class PostBookType {
 	private  BookTypeRepo bookTypeRepo;
 
 	public void BookAccountsList() {
-		ArrayList<String> preeBookTypes = new ArrayList<String>();
+		ArrayList<String> preeBookTypes = new ArrayList<>();
 		preeBookTypes.add("Purchase Book");
 		preeBookTypes.add("Purchase Return Book");
 		preeBookTypes.add("Sales Book");
@@ -30,13 +30,13 @@ public class PostBookType {
 		preeBookTypes.add("Journal Proper");
 		preeBookTypes.add("Amc Service Book");
 
-		List<BookType> bookTypeList = new ArrayList<BookType>();
-		for (int i = 0; i < preeBookTypes.size(); i++) {
+		List<BookType> bookTypeList = new ArrayList<>();
+		for (String preeBookType : preeBookTypes) {
 			Optional<BookType> optionalAcType = Optional.ofNullable(new BookType());
-			optionalAcType = getBookTypeByName(preeBookTypes.get(i));
+			optionalAcType = getBookTypeByName(preeBookType);
 			if (!optionalAcType.isPresent()) {
 				BookType bookType = new BookType();
-				bookType.setBookTypeName(preeBookTypes.get(i));
+				bookType.setBookTypeName(preeBookType);
 				bookTypeList.add(bookType);
 			}
 

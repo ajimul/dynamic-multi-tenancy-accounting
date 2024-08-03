@@ -18,18 +18,18 @@ public class PostAccountSales {
 	@Autowired
 	private  AccountsForSalesRepo accountsForSalesRepo;
 	public void AccountsSalesList() {
-		ArrayList<String> preeAccounts = new ArrayList<String>();
+		ArrayList<String> preeAccounts = new ArrayList<>();
 		preeAccounts.add("Sundry Debtors");
 		preeAccounts.add("Cash Account");
 		preeAccounts.add("Bank Account");
 
-		List<AccountsForSales> acList = new ArrayList<AccountsForSales>();
-		for (int i = 0; i < preeAccounts.size(); i++) {
+		List<AccountsForSales> acList = new ArrayList<>();
+		for (String preeAccount : preeAccounts) {
 			Optional<AccountsForSales> optionalAc = Optional.ofNullable(new AccountsForSales());
-			optionalAc = getAccountsSales(preeAccounts.get(i));
+			optionalAc = getAccountsSales(preeAccount);
 			if (!optionalAc.isPresent()) {
 				AccountsForSales ac = new AccountsForSales();
-				ac.setAccountName(preeAccounts.get(i));
+				ac.setAccountName(preeAccount);
 				acList.add(ac);
 			}
 

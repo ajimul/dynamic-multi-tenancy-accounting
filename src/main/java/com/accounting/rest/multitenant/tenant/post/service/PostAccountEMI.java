@@ -17,19 +17,19 @@ import com.accounting.rest.multitenant.tenant.repository.AccountsForEmiRepo;
 public class PostAccountEMI {
 	@Autowired
 	private AccountsForEmiRepo accountsForEmiRepo;
-	
+
 	public void AccountEMIList() {
-	ArrayList<String> preeAccounts = new ArrayList<String>();
+	ArrayList<String> preeAccounts = new ArrayList<>();
 	preeAccounts.add("Cash Account");
 	preeAccounts.add("Bank Account");
 
-	List<AccountsForEmi> acList = new ArrayList<AccountsForEmi>();
-	for (int i = 0; i < preeAccounts.size(); i++) {
+	List<AccountsForEmi> acList = new ArrayList<>();
+	for (String preeAccount : preeAccounts) {
 		Optional<AccountsForEmi> optionalAc = Optional.ofNullable(new AccountsForEmi());
-		optionalAc = getAccountsEMI(preeAccounts.get(i));
+		optionalAc = getAccountsEMI(preeAccount);
 		if (!optionalAc.isPresent()) {
 			AccountsForEmi ac = new AccountsForEmi();
-			ac.setAccountName(preeAccounts.get(i));
+			ac.setAccountName(preeAccount);
 			acList.add(ac);
 		}
 

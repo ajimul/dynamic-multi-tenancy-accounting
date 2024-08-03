@@ -34,7 +34,7 @@ public class BooksServices {
 
 	}
 
-//Find All Books 
+//Find All Books
 	public List<Books> findAllBooks() {
 		return booksRepo.findAll();
 
@@ -51,7 +51,7 @@ public class BooksServices {
 
 	}
 
-//Update Books 
+//Update Books
 
 //Delete Books By Id
 	public void deleteBooksBybooksId(Long id) {

@@ -3,7 +3,7 @@ package com.accounting.rest.exception;
 public class AccountsNotFoundException extends RuntimeException {
 
 	/**
-	 * 
+	 *
 	 */
 
 	public AccountsNotFoundException(String message) {

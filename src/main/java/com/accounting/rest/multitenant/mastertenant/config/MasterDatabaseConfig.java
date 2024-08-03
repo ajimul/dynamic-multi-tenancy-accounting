@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.hibernate.cfg.AvailableSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,10 +97,10 @@ public class MasterDatabaseConfig {
 	// Hibernate configuration properties
 	private Properties hibernateProperties() {
 		Properties properties = new Properties();
-		properties.put(org.hibernate.cfg.Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
-		properties.put(org.hibernate.cfg.Environment.SHOW_SQL, true);
-		properties.put(org.hibernate.cfg.Environment.FORMAT_SQL, true);
-		properties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "update");
+		properties.put(AvailableSettings.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
+		properties.put(AvailableSettings.SHOW_SQL, true);
+		properties.put(AvailableSettings.FORMAT_SQL, true);
+		properties.put(AvailableSettings.HBM2DDL_AUTO, "update");
 		return properties;
 	}
 }

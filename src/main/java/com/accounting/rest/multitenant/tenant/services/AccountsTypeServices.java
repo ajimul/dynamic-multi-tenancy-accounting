@@ -2,8 +2,6 @@ package com.accounting.rest.multitenant.tenant.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,7 @@ import com.accounting.rest.multitenant.tenant.repository.AccountTypeRepo;
 public class AccountsTypeServices {
 	@Autowired
 	private  AccountTypeRepo accountTypeRepo;
-		
+
 	@Autowired
 	public PostAccountsType postAccountsType;
 
@@ -38,9 +36,9 @@ public class AccountsTypeServices {
 
 	}
 
-//Find All AccountsType 
+//Find All AccountsType
 	public List<GenericsAccountsType> findAllAccountsType() {
-		List<GenericsAccountsType> typeAccounts = new ArrayList<GenericsAccountsType>();
+		List<GenericsAccountsType> typeAccounts = new ArrayList<>();
 		List<AccountType> accountsTypeList = accountTypeRepo.findAll();
 		for (AccountType accountTypes : accountsTypeList) {
 			GenericsAccountsType newAccounts = new GenericsAccountsType();

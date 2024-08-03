@@ -13,12 +13,13 @@ import com.accounting.rest.multitenant.tenant.repository.AccountsRepo;
 
 @Service
 //@Transactional() // Use For Single Database
-@Transactional("tenantTransactionManager")//Use For Multitenant
+@Transactional("tenantTransactionManager") // Use For Multitenant
 public class PostAccounts {
 	@Autowired
-	private  AccountsRepo accountsRepo;
+	private AccountsRepo accountsRepo;
+
 	public void AccountsList() {
-		ArrayList<String> preeAccounts = new ArrayList<String>();
+		ArrayList<String> preeAccounts = new ArrayList<>();
 		preeAccounts.add("Purchase Account");
 		preeAccounts.add("Purchase Return Account");
 		preeAccounts.add("Sales Account");
@@ -58,7 +59,7 @@ public class PostAccounts {
 		preeAccounts.add("Capital Account");
 		preeAccounts.add("Drawings Capital Account");
 		preeAccounts.add("Factory Account");
-		List<Accounts> acList = new ArrayList<Accounts>();
+		List<Accounts> acList = new ArrayList<>();
 
 		for (String accountName : preeAccounts) {
 			Optional<Accounts> existingAccount = Optional.ofNullable(new Accounts());

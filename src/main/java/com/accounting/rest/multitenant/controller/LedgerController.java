@@ -42,7 +42,7 @@ public class LedgerController {
 //	@GetMapping("/")
 //	public ResponseEntity<List<Ledger>> findAllLedger() {
 //		return new ResponseEntity<>(ledgerServices.findAllLedger(), HttpStatus.OK);
-//		
+//
 //	}
 	@GetMapping("/id:{Id}")
 	public ResponseEntity<GenericsLedger> GetLadgerByAccountId(@PathVariable("Id") Long Id) {

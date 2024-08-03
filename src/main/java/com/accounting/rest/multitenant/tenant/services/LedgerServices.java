@@ -63,7 +63,7 @@ public class LedgerServices {
 
 	}
 
-//Find All Ledger 
+//Find All Ledger
 	public List<Ledger> findAllLedger() {
 		return ledgerRepo.findAll();
 
@@ -112,8 +112,8 @@ public class LedgerServices {
 
 	public List<GenericsLedger> GetAllLadger() {
 
-		List<Accounts> listAccounts = new ArrayList<Accounts>(accountsRepo.findAll());
-		List<GenericsLedger> ledgers = new ArrayList<GenericsLedger>();
+		List<Accounts> listAccounts = new ArrayList<>(accountsRepo.findAll());
+		List<GenericsLedger> ledgers = new ArrayList<>();
 		for (int i = 0; i < listAccounts.size(); i++) {
 
 			ledgers.add(GetLadger(listAccounts.get(i).getAccountName()));
@@ -126,7 +126,7 @@ public class LedgerServices {
 
 		GenericsLedger genericsLeders = new GenericsLedger();
 
-		List<GenericsLedgersDetails> listLedgerDetails = new ArrayList<GenericsLedgersDetails>();
+		List<GenericsLedgersDetails> listLedgerDetails = new ArrayList<>();
 
 		PartyDetailsDTO accounts = new PartyDetailsDTO();
 		accounts = accountsRepo.getPartyDetailsByName(accountName);
@@ -134,7 +134,7 @@ public class LedgerServices {
 		AccountType accountType = new AccountType();
 		Users user = new Users();
 
-		List<Ledger> listLeders = new ArrayList<Ledger>(ledgerRepo.getLadgerByAccount_Ref(accounts.getAccountId()));
+		List<Ledger> listLeders = new ArrayList<>(ledgerRepo.getLadgerByAccount_Ref(accounts.getAccountId()));
 		for (int i = 0; i < listLeders.size(); i++) {
 			if (i == 0) {
 				accounts = accountsRepo.getPartyDetailsById(listLeders.get(i).getLedgerAccount_Ref());
@@ -180,7 +180,7 @@ public class LedgerServices {
 	}
 
 	public JasperPrint downloadInvoice(GenericsLedger getLedgers) throws JRException, IOException, ParseException {
-		List<GenericsLedgersDetails> ledgerDetails = new ArrayList<GenericsLedgersDetails>();
+		List<GenericsLedgersDetails> ledgerDetails = new ArrayList<>();
 		{
 
 			for (int j = 0; j < getLedgers.getLedgersDetails().size(); j++) {

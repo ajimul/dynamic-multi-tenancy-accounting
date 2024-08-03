@@ -36,47 +36,47 @@ import com.accounting.rest.multitenant.tenant.services.Inventory_JournalService;
  * Implementation For... 1. Folio No. 2. BooksInfo 3. Books 4. BooksDetails 5.
  * Ledgers 6. LedgersDetails 7.!product 8.!product service 9.!product service so
  * 10.!emi
- * 
+ *
  * Relationship Of Schema: Folio Is The Parent Of BookInfo And Relationship
  * Is(1:1) BookInfo Is The Parent Of Books And Relationship Is (1:N) Again
- * 
+ *
  * BookInfo Is The Parent Of BooksDetails And Relationship Is (1:N) Again
  * BooksDetails Is The Parent Of TradingItemsSerialNo And Relationship Is (1:N)
  * Again
- * 
+ *
  * BookInfo Is The Parent Of Emi And Relationship Is (1:N) Again
- * 
+ *
  * Folio Is The Parent Of Ledger And Relationship Is (1:1) Ledger Is The Parent
  * Of LedgerDetails And Relationship Is (1:N)
- * 
+ *
  * Folio Is The Parent Of Product And Relationship Is (1:1) Product is the
  * Parent of ProductService And Relationship Is (1:N) ProductService is the
  * Parent of ProductServiceSerialNo And Relationship Is (1:N)
- * 
+ *
  * Description For Implementation: Prerequisite:( Needs Proper Knowledge Of
  * Accountancy)
- * 
+ *
  * Folio Is The common Number Help To Find Out The Transaction Of Books And
  * Ledgers
- * 
+ *
  * Books Are The Record For All The Debit And Credit Accounts And Ledger Are The
  * Record For Each Single Accounts Whether Accounts Are Debit Or Credit
- * 
+ *
  * According To Books Each Accounts Should Be Post On The Ledger And Each
  * Ledgers Accounts May Have Different Roll For Each To Others Accounts A Single
  * Credit Account May Have Effect On Multiple Debit Accounts Depend On
  * Transaction Or Vice Versa To Others Accounts.
- * 
+ *
  * Every Transaction Must Be 1. Debit Account To Credit Account (Recommended) 2.
  * List<Debit> Account To Credit Account (Recommended) 3. List<Debit> Accounts
  * To List<Credit> Accounts
- * 
+ *
  * In This Package I Will Implement The Second One( 2. List<Debit> Accounts To
  * Credit Account (Recommended) ) Every Transaction Should Be Two Part 1. Books
  * (Books Of Original Entry) 2. After Books Entry Is Complete Then Its Should Be
  * Post On Ledgers
- * 
- * 
+ *
+ *
  * @author admin
  *
  */
@@ -152,7 +152,7 @@ public class SalesEditController {
 		 * 1. Credit Book Initialization
 		 */
 
-		List<Books> listBooks = new ArrayList<Books>();
+		List<Books> listBooks = new ArrayList<>();
 
 		Books credit_Account_1 = new Books();
 
@@ -239,7 +239,7 @@ public class SalesEditController {
 		/**
 		 * creadit and debit book separation for ladger
 		 */
-		List<Books> creditBooks = new ArrayList<Books>();
+		List<Books> creditBooks = new ArrayList<>();
 		Books debitBook = new Books();
 		for (Books filterBook : listBooks) {
 			if (filterBook.getBooksCreditAmount() != 0) {
@@ -258,7 +258,7 @@ public class SalesEditController {
 		 * Update InventoryItems 1. Get InventoryItems 1. Update OutwardQty Of
 		 * InventoryItems
 		 */
-		List<InventoryItems> items = new ArrayList<InventoryItems>();
+		List<InventoryItems> items = new ArrayList<>();
 		for (int i = 0; i < books.getInventoryJournal().size(); i++) {
 			InventoryItems item = new InventoryItems();
 			item = inventoryItemsService.getInventoryItemByiiId(books.getInventoryJournal().get(i).getIj_iiId());
@@ -293,9 +293,9 @@ public class SalesEditController {
 		/**
 		 * Initializing Credit Ledgers for posting
 		 */
-		List<Ledger> list_Of_Ledger = new ArrayList<Ledger>();
+		List<Ledger> list_Of_Ledger = new ArrayList<>();
 		for (Books tempBook : creditBooks) {
-			List<LedgerDetails> list_Of_Credit_Ledger_Details = new ArrayList<LedgerDetails>();
+			List<LedgerDetails> list_Of_Credit_Ledger_Details = new ArrayList<>();
 			// All Credit Account Post On Ledger
 			Ledger credit_Ledger = new Ledger();
 			LedgerDetails credit_Ledger_Details = new LedgerDetails();
@@ -317,7 +317,7 @@ public class SalesEditController {
 		/**
 		 * Initializing Debit Ledgers for posting
 		 */
-		List<LedgerDetails> list_Of_Debit_Ledger_Details = new ArrayList<LedgerDetails>();
+		List<LedgerDetails> list_Of_Debit_Ledger_Details = new ArrayList<>();
 		{
 			Ledger debit_Ledger = new Ledger();
 			debit_Ledger.setLedgerAccount_Ref(debitBook.getBooksAccount_Ref());
@@ -339,7 +339,7 @@ public class SalesEditController {
 			list_Of_Ledger.add(debit_Ledger);
 		}
 
-		List<BookInfo> newBookInfo = new ArrayList<BookInfo>();
+		List<BookInfo> newBookInfo = new ArrayList<>();
 		newBookInfo.add(bookInfo);
 		FolioNumber folioNo = new FolioNumber();
 		folioNo.setFolioNarration(books.getNaration());
@@ -355,8 +355,8 @@ public class SalesEditController {
 	}
 
 	public void InventoryItems_Update_InventoryJournal_Delete(Long voucherId) {
-		List<InventoryJournal> ij = new ArrayList<InventoryJournal>();
-		List<InventoryItems> iiList = new ArrayList<InventoryItems>();
+		List<InventoryJournal> ij = new ArrayList<>();
+		List<InventoryItems> iiList = new ArrayList<>();
 		ij = inventory_JournalService.getInventoryJournal_ByVoucherId(voucherId);
 
 		for (InventoryJournal getIJ : ij) {

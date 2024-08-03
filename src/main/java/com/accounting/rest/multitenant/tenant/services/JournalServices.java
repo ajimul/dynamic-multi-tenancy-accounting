@@ -77,13 +77,13 @@ public class JournalServices {
 		PartyDetailsDTO accounts = new PartyDetailsDTO();
 
 		AccountType accountType = new AccountType();
-		List<GenericsJournal> list_journal = new ArrayList<GenericsJournal>();
+		List<GenericsJournal> list_journal = new ArrayList<>();
 
-		List<GenericsJournalDetails> list_journalDetails = new ArrayList<GenericsJournalDetails>();
+		List<GenericsJournalDetails> list_journalDetails = new ArrayList<>();
 		GenericsJournalDetails journalDetails = new GenericsJournalDetails();
 
 		BookType bookType = new BookType();
-		List<BookInfo> Lis_bookInfo = new ArrayList<BookInfo>();
+		List<BookInfo> Lis_bookInfo = new ArrayList<>();
 
 //		BookInfo bookInfo = new BookInfo();
 
@@ -118,7 +118,7 @@ public class JournalServices {
 	}
 
 	public JasperPrint Report(List<GenericsJournal> journal) throws JRException, IOException, ParseException {
-		List<GenericsJournalDetails> journalDetails = new ArrayList<GenericsJournalDetails>();
+		List<GenericsJournalDetails> journalDetails = new ArrayList<>();
 		JasperPrint jasperPrint = new JasperPrint();
 		for (int k = 0; k < journal.size(); k++) {
 

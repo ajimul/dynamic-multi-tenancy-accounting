@@ -28,7 +28,7 @@ public class BooksInfoServices {
 
 	}
 
-//Find All BookInfo 
+//Find All BookInfo
 	public List<BookInfo> findAllBookInfo() {
 		return bookInfoRepo.findAll();
 

@@ -75,22 +75,22 @@ public class InvoiceDetailsService {
 
 	public List<PartyBookInfoDto> getPartyBookInfoDtoCheck() {
 
-		List<PartyBookInfoDto> partyBookInfo = new ArrayList<PartyBookInfoDto>();
+		List<PartyBookInfoDto> partyBookInfo = new ArrayList<>();
 		partyBookInfo = accountsRepo.getPartyBookInfo();
 		return partyBookInfo;
 	}
 
 	public List<InvoiceDetailsDto> getInvoiceList() {
-		List<InvoiceDetailsDto> filteredInventory = new ArrayList<InvoiceDetailsDto>();
+		List<InvoiceDetailsDto> filteredInventory = new ArrayList<>();
 
-		List<PartyBookInfoDto> partyBookInfo = new ArrayList<PartyBookInfoDto>();
+		List<PartyBookInfoDto> partyBookInfo = new ArrayList<>();
 		partyBookInfo = accountsRepo.getPartyBookInfo().stream()
 				.filter(t -> t.getBookInfoNarration().equals("Purchase") || t.getBookInfoNarration().equals("Sales"))
 				.collect(Collectors.toList());
 
-		List<InvoiceDetailsDto> invoiceDetailsList = new ArrayList<InvoiceDetailsDto>();
+		List<InvoiceDetailsDto> invoiceDetailsList = new ArrayList<>();
 
-		List<BooksDetailsDTO> booksDetails = new ArrayList<BooksDetailsDTO>();
+		List<BooksDetailsDTO> booksDetails = new ArrayList<>();
 		booksDetails = inventoryItemsRepo.getBooksDetails();
 
 		for (PartyBookInfoDto party : partyBookInfo) {
@@ -139,7 +139,7 @@ public class InvoiceDetailsService {
 
 			}
 		}
-		List<Long> getBookIds = new ArrayList<Long>();
+		List<Long> getBookIds = new ArrayList<>();
 
 		for (InvoiceDetailsDto data : invoiceDetailsList) {
 			getBookIds.add(data.getBookInfoId());

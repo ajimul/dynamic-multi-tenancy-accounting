@@ -52,5 +52,5 @@ public void setContact(String contact) {
 }
 
  // Constructors, getters, setters...
- 
+
 }

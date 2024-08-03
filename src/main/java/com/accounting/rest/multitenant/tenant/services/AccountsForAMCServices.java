@@ -22,8 +22,8 @@ public class AccountsForAMCServices {
 	private AccountsForAMCRepo accountsForAMCRepo;
 	@Autowired
 	private AccountsServices accountsServices;
-	@Autowired			
-	private	PostAccountAMC   postAccountAMC; 
+	@Autowired
+	private	PostAccountAMC   postAccountAMC;
 
 
 //	@PostConstruct
@@ -41,9 +41,9 @@ public class AccountsForAMCServices {
 	}
 
 	public List<TransactionalAccountDTO> getAccountForAMC() {
-		List<AccountsForAMC> getAc = new ArrayList<AccountsForAMC>();
+		List<AccountsForAMC> getAc = new ArrayList<>();
 		getAc = accountsForAMCRepo.findAll();
-		List<TransactionalAccountDTO> newGenericsAccounts = new ArrayList<TransactionalAccountDTO>();
+		List<TransactionalAccountDTO> newGenericsAccounts = new ArrayList<>();
 		for (AccountsForAMC amcAccount : getAc) {
 			TransactionalAccountDTO genericsAccounts = new TransactionalAccountDTO();
 			genericsAccounts = accountsServices.getTransactionalAccount(amcAccount.getAccountName());

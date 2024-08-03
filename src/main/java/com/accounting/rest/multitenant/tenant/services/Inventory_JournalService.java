@@ -23,7 +23,7 @@ public class Inventory_JournalService {
 	}
 
 	public List<InventoryJournal> getInventoryJournal_ByVoucherId(Long VoucherNo) {
-		List<InventoryJournal> newInventoryJournal = new ArrayList<InventoryJournal>();
+		List<InventoryJournal> newInventoryJournal = new ArrayList<>();
 		newInventoryJournal = inventoryJournalRepo.getInventoryJournal_ByVoucherId(VoucherNo);
 		return newInventoryJournal;
 

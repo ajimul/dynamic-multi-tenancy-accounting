@@ -15,6 +15,7 @@ public interface FolioNumberRepo extends JpaRepository<FolioNumber, Long> {
 			+ "FROM  FolioNumber fo " + "join fo.bookInfos bi " + "join bi.bookDetails bd " + "join bi.emi emi ")
 	List<FolioDTO> getEmi();
 
+	@Override
 	@Query("select f from FolioNumber f where f.folioId = :folioId")
 	Optional<FolioNumber> findById(@Param("folioId") Long folioId);
 

@@ -29,7 +29,7 @@ public class SubReportController {
 	public ResponseEntity<byte[]> Print() throws JRException {
 		String masterReportFileName = "src/main/resources/Ledger.jrxml";
 		String subreport = "src/main/resources/";
-		ArrayList<DataBean> dataList = new ArrayList<DataBean>();
+		ArrayList<DataBean> dataList = new ArrayList<>();
 		DataBean data1 = new DataBean("Ajimul", "AccountType", "Date", 1000l, 1000l, 100l);
 		DataBean data2 = new DataBean("Ajimul", "AccountType", "Date", 1000l, 1000l, 100l);
 		DataBean data3 = new DataBean("Ajimul", "AccountType", "Date", 1000l, 1000l, 100l);
@@ -153,7 +153,7 @@ public class SubReportController {
 
 		try {
 			JasperReport compailReport = JasperCompileManager.compileReport(masterReportFileName);
-			Map<String, Object> parameters = new HashMap<String, Object>();
+			Map<String, Object> parameters = new HashMap<>();
 			parameters.put("bookOf", "bookOf");
 			parameters.put("narration", "narration");
 			parameters.put("SUBREPORT_DIR", subreport);

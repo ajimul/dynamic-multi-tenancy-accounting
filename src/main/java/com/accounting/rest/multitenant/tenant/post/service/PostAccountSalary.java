@@ -18,17 +18,17 @@ public class PostAccountSalary {
 	@Autowired
 	private  AccountsForSalaryRepo accountsForSalaryRepo;
 	public void AccountSalaryList() {
-		ArrayList<String> preeAccounts = new ArrayList<String>();
+		ArrayList<String> preeAccounts = new ArrayList<>();
 		preeAccounts.add("Cash Account");
 		preeAccounts.add("Bank Account");
 
-		List<AccountsForSalary> acList = new ArrayList<AccountsForSalary>();
-		for (int i = 0; i < preeAccounts.size(); i++) {
+		List<AccountsForSalary> acList = new ArrayList<>();
+		for (String preeAccount : preeAccounts) {
 			Optional<AccountsForSalary> optionalAc = Optional.ofNullable(new AccountsForSalary());
-			optionalAc = getAccountsSalary(preeAccounts.get(i));
+			optionalAc = getAccountsSalary(preeAccount);
 			if (!optionalAc.isPresent()) {
 				AccountsForSalary ac = new AccountsForSalary();
-				ac.setAccountName(preeAccounts.get(i));
+				ac.setAccountName(preeAccount);
 				acList.add(ac);
 			}
 

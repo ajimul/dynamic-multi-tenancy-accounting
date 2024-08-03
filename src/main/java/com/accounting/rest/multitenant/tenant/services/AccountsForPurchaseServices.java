@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.accounting.rest.multitenant.dto.TransactionalAccountDTO;
 import com.accounting.rest.multitenant.tenant.entity.AccountsForPurchase;
@@ -41,9 +40,9 @@ public class AccountsForPurchaseServices {
 	}
 
 	public List<TransactionalAccountDTO> getAccountForPurchase() {
-		List<AccountsForPurchase> getAc = new ArrayList<AccountsForPurchase>();
+		List<AccountsForPurchase> getAc = new ArrayList<>();
 		getAc = accountsForPurchaseRepo.findAll();
-		List<TransactionalAccountDTO> newGenericsAccounts = new ArrayList<TransactionalAccountDTO>();
+		List<TransactionalAccountDTO> newGenericsAccounts = new ArrayList<>();
 		for (AccountsForPurchase purchaseAccount : getAc) {
 			TransactionalAccountDTO genericsAccounts = new TransactionalAccountDTO();
 			genericsAccounts = accountsServices.getTransactionalAccount(purchaseAccount.getAccountName());

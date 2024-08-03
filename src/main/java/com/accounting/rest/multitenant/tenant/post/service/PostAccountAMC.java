@@ -17,26 +17,26 @@ import com.accounting.rest.multitenant.tenant.repository.AccountsForAMCRepo;
 public class PostAccountAMC {
 	@Autowired
 	private  AccountsForAMCRepo accountsForAMCRepo;
-	
+
 	public void AccountAMCList() {
-		ArrayList<String> preeAccounts = new ArrayList<String>();
+		ArrayList<String> preeAccounts = new ArrayList<>();
 		preeAccounts.add("Sundry Debtors");
 		preeAccounts.add("Cash Account");
 		preeAccounts.add("Bank Account");
 
-		List<AccountsForAMC> acList = new ArrayList<AccountsForAMC>();
-	
-		for (int i = 0; i < preeAccounts.size(); i++) {
+		List<AccountsForAMC> acList = new ArrayList<>();
+
+		for (String preeAccount : preeAccounts) {
 			Optional<AccountsForAMC> optionalAc = Optional.ofNullable(new AccountsForAMC());
-			optionalAc = getAccountsAMC(preeAccounts.get(i));
+			optionalAc = getAccountsAMC(preeAccount);
 			if (!optionalAc.isPresent()) {
 				AccountsForAMC ac = new AccountsForAMC();
-				ac.setAccountName(preeAccounts.get(i));
+				ac.setAccountName(preeAccount);
 				acList.add(ac);
 			}
 
 		}
-		
+
 		if (acList.size() != 0) {
 			accountsForAMCRepo.saveAll(acList);
 		}

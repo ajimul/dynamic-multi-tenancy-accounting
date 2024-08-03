@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
-
-import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.accounting.rest.multitenant.dto.TransactionalAccountDTO;
 import com.accounting.rest.multitenant.tenant.entity.AccountsForSalary;
@@ -45,10 +42,10 @@ public class AccountsForSalaryServices {
 	}
 
 	public List<TransactionalAccountDTO> getAccountForSalary() {
-		List<AccountsForSalary> getAc = new ArrayList<AccountsForSalary>();
+		List<AccountsForSalary> getAc = new ArrayList<>();
 		getAc = accountsForSalaryRepo.findAll();
 
-		List<TransactionalAccountDTO> newGenericsAccounts = new ArrayList<TransactionalAccountDTO>();
+		List<TransactionalAccountDTO> newGenericsAccounts = new ArrayList<>();
 		for (AccountsForSalary salaryAccount : getAc) {
 
 			TransactionalAccountDTO genericsAccounts = new TransactionalAccountDTO();

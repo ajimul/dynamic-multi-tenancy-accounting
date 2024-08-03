@@ -92,7 +92,7 @@ public class EmiControlController {
 		/**
 		 * 1. Credit Book Initialization
 		 */
-		List<Books> listBooks = new ArrayList<Books>();
+		List<Books> listBooks = new ArrayList<>();
 
 		Books credit_Account_1 = new Books();
 
@@ -127,7 +127,7 @@ public class EmiControlController {
 		/**
 		 * creadit and debit book separation for ladger
 		 */
-		List<Books> creditBooks = new ArrayList<Books>();
+		List<Books> creditBooks = new ArrayList<>();
 
 		Books debitBook = new Books();
 
@@ -163,11 +163,11 @@ public class EmiControlController {
 		 * Initializing Credit Ledgers for posting
 		 */
 
-		List<Ledger> list_Of_Ledger = new ArrayList<Ledger>();
+		List<Ledger> list_Of_Ledger = new ArrayList<>();
 
 		for (Books tempBook : creditBooks) {
 
-			List<LedgerDetails> list_Of_Credit_Ledger_Details = new ArrayList<LedgerDetails>();
+			List<LedgerDetails> list_Of_Credit_Ledger_Details = new ArrayList<>();
 
 			// All Credit Account Post On Ledger
 			Ledger credit_Ledger = new Ledger();
@@ -197,7 +197,7 @@ public class EmiControlController {
 		 * Initializing Debit Ledgers for posting
 		 */
 
-		List<LedgerDetails> list_Of_Debit_Ledger_Details = new ArrayList<LedgerDetails>();
+		List<LedgerDetails> list_Of_Debit_Ledger_Details = new ArrayList<>();
 
 		{
 			// All Debit Account Post On Ledger
@@ -226,8 +226,8 @@ public class EmiControlController {
 			list_Of_Ledger.add(debit_Ledger);
 		}
 
-//		list_Of_Ledger    ready 
-		List<BookInfo> newBookInfo = new ArrayList<BookInfo>();
+//		list_Of_Ledger    ready
+		List<BookInfo> newBookInfo = new ArrayList<>();
 		newBookInfo.add(bookInfo);
 		FolioNumber folioNo = new FolioNumber();
 		folioNo.setFolioNarration(payEmi.getNarration());

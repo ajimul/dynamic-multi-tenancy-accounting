@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.accounting.rest.multitenant.dto.EmiListDTO;
 import com.accounting.rest.multitenant.dto.EmiSmsConfig;
@@ -23,7 +22,6 @@ import com.accounting.rest.multitenant.dto.TransactionalAccountDTO;
 import com.accounting.rest.multitenant.tenant.entity.Accounts;
 import com.accounting.rest.multitenant.tenant.entity.EmployeeDetails;
 import com.accounting.rest.multitenant.tenant.entity.PartyDetails;
-import com.accounting.rest.multitenant.tenant.post.service.PostAccountSales;
 import com.accounting.rest.multitenant.tenant.post.service.PostAccounts;
 import com.accounting.rest.multitenant.tenant.repository.AccountsRepo;
 import com.accounting.rest.multitenant.tenant.repository.EmployeeDetailsRepo;
@@ -72,7 +70,7 @@ public class AccountsServices {
 //Add Employee
 	public void addEmployee(EmployeeDetailsDTO emp) {
 		Accounts ac = new Accounts();
-		List<EmployeeDetails> empList = new ArrayList<EmployeeDetails>();
+		List<EmployeeDetails> empList = new ArrayList<>();
 		EmployeeDetails empDetails = new EmployeeDetails();
 		empDetails.setEmpContactNo1(emp.getEmpContactNo1());
 		empDetails.setEmpContactNo2(emp.getEmpContactNo2());
@@ -104,7 +102,7 @@ public class AccountsServices {
 //Add Party
 	public void addParty(PartyModel party) {
 		Accounts ac = new Accounts();
-		List<PartyDetails> partyList = new ArrayList<PartyDetails>();
+		List<PartyDetails> partyList = new ArrayList<>();
 		PartyDetails partyDetails = new PartyDetails();
 		partyDetails.setPartyContactNo1(party.getPartyContactNo1());
 		partyDetails.setPartyContactNo2(party.getPartyContactNo2());
@@ -130,7 +128,7 @@ public class AccountsServices {
 
 	// Join Table Response(Accounts+PartyDetails+BookInfo+BookDetails+Emi)
 	public List<EmiListDTO> getEmi() {
-		List<EmiListDTO> getEmiData = new ArrayList<EmiListDTO>();
+		List<EmiListDTO> getEmiData = new ArrayList<>();
 		getEmiData = accountsRepo.getEmiList();
 		return getEmiData;
 
@@ -199,7 +197,7 @@ public class AccountsServices {
 	}
 
 	public List<PartyDetailsDTO> getPartyDetailsList() {
-		List<PartyDetailsDTO> accounts = new ArrayList<PartyDetailsDTO>();
+		List<PartyDetailsDTO> accounts = new ArrayList<>();
 		accounts = accountsRepo.getPartyDetailsList();
 		return accounts;
 	}
@@ -219,7 +217,7 @@ public class AccountsServices {
 	}
 
 	public List<EmployeeDetailsDTO> getEmployeeDetailsList() {
-		List<EmployeeDetailsDTO> accounts = new ArrayList<EmployeeDetailsDTO>();
+		List<EmployeeDetailsDTO> accounts = new ArrayList<>();
 		accounts = accountsRepo.getEmployeeDetailsList();
 		return accounts;
 	}
@@ -326,8 +324,8 @@ public class AccountsServices {
 	public InvoicePrintObject getSalesInvoicePrintList(Long acId, Long FolioNo) {
 		InvoicePrintObject invoicePrintObject = new InvoicePrintObject();
 
-		List<InvoiceJRBeanDataSource> printViewList = new ArrayList<InvoiceJRBeanDataSource>();
-		List<InvoiceDataDTO> printDTO = new ArrayList<InvoiceDataDTO>();
+		List<InvoiceJRBeanDataSource> printViewList = new ArrayList<>();
+		List<InvoiceDataDTO> printDTO = new ArrayList<>();
 		printDTO = accountsRepo
 				.getInvoiceData().stream().filter(t -> t.getBookInfoNarration().equals("Sales")
 						&& t.getAccountId().equals(acId) && t.getBookInfoFolio_Ref().equals(FolioNo))
@@ -347,7 +345,7 @@ public class AccountsServices {
 			for (int i = 0; i < 2; i++) {
 				InvoiceDataDTO data = printDTO.get(0);
 				InvoiceJRBeanDataSource printView = new InvoiceJRBeanDataSource();
-				List<String> list = new ArrayList<String>();
+				List<String> list = new ArrayList<>();
 				list.add("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1");
 				list.add("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx2");
 				list.add("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx3");
@@ -377,7 +375,7 @@ public class AccountsServices {
 	}
 
 	public List<InvoiceDataDTO> getPurchaseInvoicePrintList(Long acId) {
-		List<InvoiceDataDTO> printDTO = new ArrayList<InvoiceDataDTO>();
+		List<InvoiceDataDTO> printDTO = new ArrayList<>();
 		printDTO = accountsRepo.getInvoiceData().stream()
 				.filter(t -> t.getBookInfoNarration().equals("Purchase") && t.getAccountId().equals(acId))
 				.collect(Collectors.toList());
